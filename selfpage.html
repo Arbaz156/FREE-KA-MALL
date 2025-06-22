@@ -36,13 +36,15 @@
     <p>Telegram join karne ke baad hi application open hogi</p>
     <a class="btn" href="https://t.me/arbazkingdg" onclick="onJoinClick()">Join Telegram</a>
   </div>
-
-  <script>
-    function onJoinClick() {
-      setTimeout(function() {
-    window.location.href = "gonative://close"
-     }, 1000); // ✅ 1 second baad WebView close hoga
-    }
-  </script>
+}
+<script>
+  function onJoinClick() {
+    setTimeout(function() {
+      try { window.location.href = "gonative://close"; } catch(e) {}
+      try { Android.closeWebView(); } catch(e) {}
+      try { window.close(); } catch(e) {}
+    }, 1000);
+  }
+</script>
 </body>
 </html>
