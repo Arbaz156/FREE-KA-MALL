@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>82 Lottery Gate + Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f9f9f9;
+    }
+    #game-section, #result, #play-section {
+      display: none;
+      margin-top: 30px;
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #008CBA;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #007bb5;
+    }
+    #gate {
+      background-color: #ffffff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="gate">
+    <h2>🔒 Join Our Telegram Channel to Continue</h2>
+    <p>Get predictions & lucky numbers only for members.</p>
+    <button onclick="openTelegramAndShowGame()">🚪 Join Now & Continue</button>
+  </div>
+
+  <div id="game-section">
+    <h1>🔮 82 Lottery Prediction</h1>
+    <h2>Prediction: <span id="prediction">--</span></h2>
+    <p>⏳ Result will appear in 3 seconds...</p>
+
+    <div id="result">
+      🎯 Lucky Number: <span id="number">--</span><br>
+      ✅ Prediction: <span id="final">--</span>
+    </div>
+
+    <div id="play-section">
+      <h3>👉 Start Your Lottery Game</h3>
+      <a href="https://www.82bet33.com/#/register?invitationCode=232115852028https://t.me/arbazkingdg" target="_blank">
+        <button>Play Now</button>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    function openTelegramAndShowGame() {
+      window.open("https://t.me/arbazkingdg");
+      document.getElementById("gate").style.display = "none";
+      document.getElementById("game-section").style.display = "block";
+
+      const number = Math.floor(Math.random() * 100) + 1;
+      const prediction = number <= 49 ? "Small" : "Big";
+      document.getElementById("prediction").innerText = prediction;
+
+      setTimeout(() => {
+        document.getElementById("number").innerText = number;
+        document.getElementById("final").innerText = prediction;
+        document.getElementById("result").style.display = "block";
+        document.getElementById("play-section").style.display = "block";
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
