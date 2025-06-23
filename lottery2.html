@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>82 Lottery Pro Prediction</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      text-align: center;
+    }
+    .gate {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .gate-box {
+      background: #222;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #0ff;
+    }
+    .join-btn {
+      background-color: #0088cc;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    .container {
+      padding: 20px;
+    }
+    .box {
+      background: #1f1f1f;
+      margin: 15px auto;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 400px;
+      box-shadow: 0 0 5px #444;
+    }
+    .label {
+      font-size: 16px;
+      color: #aaa;
+    }
+    .value {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+    .prediction-box {
+      font-size: 26px;
+      padding: 15px;
+      color: white;
+      border-radius: 8px;
+      animation: blink 1s infinite;
+    }
+    .prediction-BIG {
+      background: #28a745;
+    }
+    .prediction-SMALL {
+      background: #dc3545;
+    }
+    @keyframes blink {
+      50% { opacity: 0.6; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Telegram Join Gate -->
+<div class="gate" id="telegramGate">
+  <div class="gate-box">
+    <h2>Join Telegram to Access Prediction</h2>
+    <button class="join-btn" onclick="unlockApp()">Join Now</button>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="container" id="mainApp" style="display:none;">
+  <div class="box">
+    <div class="label">Period ID</div>
+    <div class="value" id="periodId">Loading...</div>
+  </div>
+
+  <div class="box prediction-box" id="predictionBox">Calculating...</div>
+
+  <div class="box">
+    <div class="label">Next Result In</div>
+    <div class="value" id="timer">60s</div>
+  </div>
+
+  <!-- History Table Placeholder (Part 3) -->
+  <div class="box">
+    <div class="label">Prediction History</div>
+    <table id="historyTable" style="width:100%; margin-top:10px; color:white;">
+      <thead>
+        <tr><th>Period</th><th>Prediction</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+<script>
+  // Join gate logic
+  function unlockApp() {
+    // Open Telegram (placeholder link)
+    window.open("https://t.me/arbazkingdg", "_blank");
+
+    // Unlock after 1 second
+    setTimeout(() => {
+      document.getElementById("telegramGate").style.display = "none";
+      document.getElementById("mainApp").style.display = "block";
+    }, 1000);
+  }
+
+  // Period ID logic – real-time format like YYYYMMDDHHmm
+  function getPeriodId() {
+    const now = new Date();
+    const Y = now.getFullYear();
+    const M = String(now.getMonth() + 1).padStart(2, '0');
+    const D = String(now.getDate()).padStart(2, '0');
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const s = String(now.getSeconds()).padStart(2, '0');
+    return `${Y}${M}${D}${h}${m}${s}`;
+  }
+
+  // Simple random prediction logic – replace with real logic later
+  function generatePrediction() {
+    return Math.random() < 0.5 ? "BIG" : "SMALL";
+  }
+
+  // Apply prediction styling
+  function displayPrediction(prediction) {
+    const box = document.getElementById("predictionBox");
+    box.textContent = prediction;
+    box.classList.remove("prediction-BIG", "prediction-SMALL");
+
+    if (prediction === "BIG") {
+      box.classList.add("prediction-BIG");
+    } else {
+      box.classList.add("prediction-SMALL");
+    }
+  }
+
+  // Add result to table
+  function addToHistory(period, prediction) {
+    const table = document.getElementById("historyTable").querySelector("tbody");
+    const row = document.createElement("tr");
+    row.innerHTML = `<td>${period}</td><td>${prediction}</td>`;
+    table.prepend(row);
+    if (table.rows.length > 10) {
+      table.deleteRow(10);
+    }
+  }
+
+  // Timer logic
+  let countdown = 60;
+
+  function updateTimer() {
+    document.getElementById("timer").textContent = countdown + "s";
+    countdown--;
+
+    if (countdown < 0) {
+      countdown = 60;
+
+      // Generate new prediction
+      const newPeriod = getPeriodId();
+      const newPrediction = generatePrediction();
+      document.getElementById("periodId").textContent = newPeriod;
+      displayPrediction(newPrediction);
+      addToHistory(newPeriod, newPrediction);
+    }
+  }
+
+  // Initialize on load
+  function initializeApp() {
+    const initialPeriod = getPeriodId();
+    const initialPrediction = generatePrediction();
+    document.getElementById("periodId").textContent = initialPeriod;
+    displayPrediction(initialPrediction);
+    addToHistory(initialPeriod, initialPrediction);
+    setInterval(updateTimer, 1000);
+  }
+
+  // Start app after DOM loads
+  document.addEventListener("DOMContentLoaded", () => {
+    initializeApp();
+  });
+</body>
+</html>
+<div class="box">
+  <button onclick="window.open('https://www.82lottery8.in/#/register?invitationCode=232115852028", "_blank")" style="background:#ffa500;color:#000;padding:10px 20px;font-size:18px;border:none;border-radius:5px;cursor:pointer;">
+    🎮 Play Lottery Game
+  </button>
+</div>
